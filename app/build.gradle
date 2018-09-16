@@ -76,8 +76,6 @@ dependencies {
     // Test helpers
 
     //        testImplementation "android.arch.persistence.room:testing:$room_version"
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
     //    implementation 'com.squareup.retrofit2:retrofit-adapters:2.4.0'
 
@@ -98,4 +96,18 @@ dependencies {
 
     //分页
     implementation 'android.arch.paging:runtime:1.0.1'
+
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'//RxJava与Retrofit的adapter
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'//RxJava2与Retrofit的adapter
+    implementation 'com.commit451:PhotoView:1.2.4'
+    implementation ('com.squareup.retrofit2:retrofit:2.1.0') {
+        exclude module: 'okhttp'
+    }
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 }

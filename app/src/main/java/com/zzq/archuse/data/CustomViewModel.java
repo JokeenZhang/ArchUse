@@ -12,8 +12,11 @@ public class CustomViewModel extends ViewModel{
         mStringMutableLiveData = new MutableLiveData<>();
     }
 
-    public LiveData<String> setNotifiedText(String text) {
-        mStringMutableLiveData.setValue(text);
+    public LiveData<String> getLiveData() {
         return mStringMutableLiveData;
+    }
+
+    public void setChangeValue(String value) {
+        mStringMutableLiveData.setValue(value);
     }
 }
