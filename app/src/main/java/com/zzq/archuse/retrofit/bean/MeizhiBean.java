@@ -1,6 +1,9 @@
 package com.zzq.archuse.retrofit.bean;
 
-public class MeizhiBean {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class MeizhiBean implements Parcelable {
 
     private String _id;
     private String createdAt;
@@ -11,6 +14,30 @@ public class MeizhiBean {
     private String url;
     private boolean used;
     private String who;
+
+    protected MeizhiBean(Parcel in) {
+        _id = in.readString();
+        createdAt = in.readString();
+        desc = in.readString();
+        publishedAt = in.readString();
+        source = in.readString();
+        type = in.readString();
+        url = in.readString();
+        used = in.readByte() != 0;
+        who = in.readString();
+    }
+
+    public static final Creator<MeizhiBean> CREATOR = new Creator<MeizhiBean>() {
+        @Override
+        public MeizhiBean createFromParcel(Parcel in) {
+            return new MeizhiBean(in);
+        }
+
+        @Override
+        public MeizhiBean[] newArray(int size) {
+            return new MeizhiBean[size];
+        }
+    };
 
     public String get_id() {
         return _id;
@@ -82,5 +109,23 @@ public class MeizhiBean {
 
     public void setWho(String who) {
         this.who = who;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_id);
+        dest.writeString(createdAt);
+        dest.writeString(desc);
+        dest.writeString(publishedAt);
+        dest.writeString(source);
+        dest.writeString(type);
+        dest.writeString(url);
+        dest.writeByte((byte) (used ? 1 : 0));
+        dest.writeString(who);
     }
 }

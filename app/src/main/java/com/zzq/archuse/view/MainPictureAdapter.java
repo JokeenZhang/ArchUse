@@ -11,27 +11,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.zzq.archuse.R;
-import com.zzq.archuse.retrofit.bean.FuliDataBean;
+import com.zzq.archuse.retrofit.bean.MeizhiBean;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainPictureAdapter extends PagedListAdapter<FuliDataBean.ResultsBean, MainPictureAdapter.MainPictureHolder> {
-
-    private List<FuliDataBean.ResultsBean> data = new ArrayList<>();
+public class MainPictureAdapter extends PagedListAdapter<MeizhiBean, MainPictureAdapter.MainPictureHolder> {
 
     public MainPictureAdapter() {
         super(DIFF_CALLBACK);
     }
 
-    public static final DiffUtil.ItemCallback<FuliDataBean.ResultsBean> DIFF_CALLBACK = new DiffUtil.ItemCallback<FuliDataBean.ResultsBean>() {
+    public static final DiffUtil.ItemCallback<MeizhiBean> DIFF_CALLBACK = new DiffUtil.ItemCallback<MeizhiBean>() {
         @Override
-        public boolean areItemsTheSame(FuliDataBean.ResultsBean oldItem, FuliDataBean.ResultsBean newItem) {
+        public boolean areItemsTheSame(MeizhiBean oldItem, MeizhiBean newItem) {
             return oldItem.get_id().equals(newItem.get_id());
         }
 
         @Override
-        public boolean areContentsTheSame(FuliDataBean.ResultsBean oldItem, FuliDataBean.ResultsBean newItem) {
+        public boolean areContentsTheSame(MeizhiBean oldItem, MeizhiBean newItem) {
             return oldItem.equals(newItem);
         }
     };
@@ -48,15 +43,10 @@ public class MainPictureAdapter extends PagedListAdapter<FuliDataBean.ResultsBea
     @Override
     public void onBindViewHolder(@NonNull MainPictureHolder holder, int position) {
         holder.mImageView.setVisibility(View.GONE);
-        holder.mTextView.setText(data.get(position).getUrl());
+        holder.mTextView.setText(getItem(position).getUrl());
 //        Glide.with(holder.itemView.getContext())
 //                .load(data.get(position).getUrl())
 //                .into(holder.mImageView);
-    }
-
-    @Override
-    public int getItemCount() {
-        return data == null ? 0 : data.size();
     }
 
     public static class MainPictureHolder extends RecyclerView.ViewHolder {

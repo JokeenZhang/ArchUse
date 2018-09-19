@@ -11,9 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.zzq.archuse.bypaging.FuliDataViewModel;
-import com.zzq.archuse.retrofit.bean.FuliDataBean;
+import com.zzq.archuse.retrofit.bean.MeizhiBean;
 import com.zzq.archuse.view.MainPictureAdapter;
 
 public class MainActivity extends AppCompatActivity implements LifecycleOwner {
@@ -41,14 +42,16 @@ public class MainActivity extends AppCompatActivity implements LifecycleOwner {
         rvMainPict.setItemAnimator(defaultItemAnimator);
 
         FuliDataViewModel fuliDataViewModel = ViewModelProviders.of(this).get(FuliDataViewModel.class);
-        fuliDataViewModel.getFuliResultLiveData().observe(this, new Observer<PagedList<FuliDataBean.ResultsBean>>() {
+        fuliDataViewModel.getFuliResultLiveData().observe(this, new Observer<PagedList<MeizhiBean>>() {
             @Override
-            public void onChanged(@Nullable PagedList<FuliDataBean.ResultsBean> resultsBeans) {
+            public void onChanged(@Nullable PagedList<MeizhiBean> resultsBeans) {
                 mPictureAdapter.submitList(resultsBeans);
+                Log.e("ArchUse", "size = " + mPictureAdapter.getItemCount());
             }
         });
 
         rvMainPict.setAdapter(mPictureAdapter);
+
     }
 
 }

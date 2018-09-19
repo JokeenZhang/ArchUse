@@ -1,8 +1,11 @@
 package com.zzq.archuse.retrofit.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class FuliDataBean {
+public class FuliDataBean implements Parcelable{
 
     /**
      * error : false
@@ -10,7 +13,23 @@ public class FuliDataBean {
      */
 
     private boolean error;
-    private List<ResultsBean> results;
+    private List<MeizhiBean> results;
+
+    protected FuliDataBean(Parcel in) {
+        error = in.readByte() != 0;
+    }
+
+    public static final Creator<FuliDataBean> CREATOR = new Creator<FuliDataBean>() {
+        @Override
+        public FuliDataBean createFromParcel(Parcel in) {
+            return new FuliDataBean(in);
+        }
+
+        @Override
+        public FuliDataBean[] newArray(int size) {
+            return new FuliDataBean[size];
+        }
+    };
 
     public boolean isError() {
         return error;
@@ -20,107 +39,21 @@ public class FuliDataBean {
         this.error = error;
     }
 
-    public List<ResultsBean> getResults() {
+    public List<MeizhiBean> getResults() {
         return results;
     }
 
-    public void setResults(List<ResultsBean> results) {
+    public void setResults(List<MeizhiBean> results) {
         this.results = results;
     }
 
-    public static class ResultsBean {
-        /**
-         * _id : 5b74e9409d21222c52ae4cb4
-         * createdAt : 2018-08-16T11:02:24.289Z
-         * desc : 2018-08-16
-         * publishedAt : 2018-08-16T00:00:00.0Z
-         * source : api
-         * type : 福利
-         * url : https://ws1.sinaimg.cn/large/0065oQSqly1fubd0blrbuj30ia0qp0yi.jpg
-         * used : true
-         * who : lijinshan
-         */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-        private String _id;
-        private String createdAt;
-        private String desc;
-        private String publishedAt;
-        private String source;
-        private String type;
-        private String url;
-        private boolean used;
-        private String who;
-
-        public String get_id() {
-            return _id;
-        }
-
-        public void set_id(String _id) {
-            this._id = _id;
-        }
-
-        public String getCreatedAt() {
-            return createdAt;
-        }
-
-        public void setCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
-        }
-
-        public String getDesc() {
-            return desc;
-        }
-
-        public void setDesc(String desc) {
-            this.desc = desc;
-        }
-
-        public String getPublishedAt() {
-            return publishedAt;
-        }
-
-        public void setPublishedAt(String publishedAt) {
-            this.publishedAt = publishedAt;
-        }
-
-        public String getSource() {
-            return source;
-        }
-
-        public void setSource(String source) {
-            this.source = source;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public void setType(String type) {
-            this.type = type;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public boolean isUsed() {
-            return used;
-        }
-
-        public void setUsed(boolean used) {
-            this.used = used;
-        }
-
-        public String getWho() {
-            return who;
-        }
-
-        public void setWho(String who) {
-            this.who = who;
-        }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeByte((byte) (error ? 1 : 0));
     }
 }

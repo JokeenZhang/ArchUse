@@ -6,7 +6,7 @@ import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
 
 import com.zzq.archuse.ArchUseApp;
-import com.zzq.archuse.retrofit.bean.FuliDataBean;
+import com.zzq.archuse.retrofit.bean.MeizhiBean;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 public class FuliDataViewModel extends ViewModel {
 
     private Executor executor;
-    private LiveData<PagedList<FuliDataBean.ResultsBean>> fuliResultLiveData;
+    private LiveData<PagedList<MeizhiBean>> fuliResultLiveData;
     private ArchUseApp mArchUseApp;
 
     public FuliDataViewModel() {
@@ -40,10 +40,9 @@ public class FuliDataViewModel extends ViewModel {
         fuliResultLiveData = (new LivePagedListBuilder(fuliDataSourceFactory, pagedListConfig))
                 .setFetchExecutor(executor)
                 .build();
-        fuliDataSourceFactory.setLiveData(fuliResultLiveData);
     }
 
-    public LiveData<PagedList<FuliDataBean.ResultsBean>> getFuliResultLiveData() {
+    public LiveData<PagedList<MeizhiBean>> getFuliResultLiveData() {
         return fuliResultLiveData;
     }
 }
