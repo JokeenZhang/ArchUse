@@ -10,6 +10,6 @@ import retrofit2.http.Path;
 public interface GankApiService {
 
     @GET("data/福利/{pageAccount}/{pageIndex}")
-    Observable<FuliDataBean> getFuliData(@Path("pageAccount") int account, @Path("pageIndex") int index);
+    Observable<FuliDataBean> getFuliData(@Path("pageAccount") int account, @Path("pageIndex") long index);
 
 }
